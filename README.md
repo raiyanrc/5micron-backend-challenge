@@ -1,6 +1,8 @@
 # 5micron-backend-challenge
 
-This project is a Node.js web server using Express that listens on port 3000 and handles incoming sensor data in JSON format. The data is stored in a PostgreSQL database. The main endpoint for handling sensor data is `/api/sensors`, which only allows POST requests in JSON format with specific properties.
+This project is a Node.js web server using Express that listens on port 3000 and handles incoming sensor data in JSON format.
+The data is stored in a PostgreSQL database.
+The main endpoint for handling sensor data is `/api/sensors`, which only allows POST requests in JSON format with specific properties.
 
 ## Prerequisites
 
