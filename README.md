@@ -1,7 +1,7 @@
 # 5micron-backend-challenge
 
-This project is a Node.js web server using Express that listens on port 3000 and handles incoming sensor data in JSON format.
-The data is stored in a PostgreSQL database.
+This project is a Node.js web server using Express that listens on port 3000 and handles incoming sensor data in JSON format.<br>
+The data is stored in a PostgreSQL database.<br>
 The main endpoint for handling sensor data is `/api/sensors`, which only allows POST requests in JSON format with specific properties.
 
 ## Prerequisites
@@ -49,7 +49,24 @@ Before running the application, make sure you have the following prerequisites i
 
 ## Running the Application
 
-To start the server, run the following command:
+To start the server, simply run the following command:
 
 ```bash
 npm start
+```
+
+The server will be running at http://localhost:3000
+
+## Improvements
+
+- **Unit Testing:**
+
+To make the server application more comprehensive, unit tests are also implemented under test/test.js
+
+To execute the tests, run the following command:
+
+```bash
+npm test
+```
+
+
