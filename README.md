@@ -22,7 +22,7 @@ Before running the application, make sure you have the following prerequisites i
 2. **Navigate to the project folder:**
 
     ```bash
-    cd /path/to/project
+    cd /path/to/5micron-backend-challenge
     ```
 
 3. **Install dependencies:**
@@ -34,7 +34,7 @@ Before running the application, make sure you have the following prerequisites i
 4. **Create a PostgreSQL database and configure the environment variables:**
 
     - Create a database in PostgreSQL.
-    - Create or modify the `.env` file in the project root and add the following:
+    - Create the `.env` file in the project root and add the following:
 
         ```env
         # Database config
