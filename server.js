@@ -11,8 +11,8 @@ server.use(express.json());
 
 // Additionally throwing an error message for other request methods
 server.use("/api/sensors", (request, response, next) => {
-    if (request.method !== 'POST') {
-        return response.status(405).json({ error: 'Method Not Allowed', allowedMethods: ['POST'] });
+    if (request.method !== "POST") {
+        return response.status(405).json({ error: "Method Not Allowed", allowedMethods: ["POST"] });
     }
     next();
 });
@@ -31,8 +31,8 @@ server.post("/api/sensors", async (request, response) => {
         // Calling the insertData function from database.js
         await database.insertData(data);
         response.status(201).json({ message: "Data stored successfully" });
-    } catch (error) {
-        console.error("Data Insert Error:", error);
+    } catch (err) {
+        console.error("Data Insert Error:", err);
         response.status(500).json({ error: "Internal Server Error" });
     }
 });

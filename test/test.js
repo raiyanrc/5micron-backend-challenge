@@ -18,7 +18,7 @@ const generateTestData = () => ({
 // Test suite for /api/sensors endpoint
 describe("/api/sensors endpoint", () => {
     it("should return 405 if the request method is not POST", async () => {
-        const response = await request(server).get('/api/sensors');
+        const response = await request(server).get("/api/sensors");
         assert.strictEqual(response.status, 405);
         assert.deepStrictEqual(response.body, {error: "Method Not Allowed", allowedMethods: ["POST"]});
       });

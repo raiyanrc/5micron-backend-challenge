@@ -1,0 +1,64 @@
+version: '3'
+services:
+  # main database
+  postgres:
+    image: postgres:16.0
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1q2w3e4r
+      POSTGRES_DB: fivemicron_db
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+  
+  # test database
+  test-postgres:
+    image: postgres:16.0
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1q2w3e4r
+      POSTGRES_DB: test_fivemicron_db
+    ports:
+      - "5433:5432"
+    networks:
+      - app-network
+
+  # main server
+  node-server:
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    environment:
+      DB_USER: postgres
+      DB_HOST: postgres
+      DB_NAME: fivemicron_db
+      TEST_DB_NAME: test_fivemicron_db
+      DB_PASSWORD: 1q2w3e4r
+      DB_PORT: 5432
+    command: npm start
+
+  # test server
+  test-runner:
+    build: .
+    depends_on:
+      - test-postgres
+    environment:
+      DB_USER: postgres
+      DB_HOST: test-postgres
+      DB_NAME: fivemicron_db
+      TEST_DB_NAME: test_fivemicron_db
+      DB_PASSWORD: 1q2w3e4r
+      DB_PORT: 5432
+      NODE_ENV: test
+    command: npm start
+    networks:
+      - app-network
+
+# common network
+networks:
+  app-network:
