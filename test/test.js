@@ -31,7 +31,6 @@ describe("/api/sensors endpoint", () => {
 
     it("should store data in the database and return 201 if the request is valid", async () => {
         const testData = generateTestData();
-
         const response = await request(server).post("/api/sensors").send(testData);
         assert.strictEqual(response.status, 201);
         assert.deepStrictEqual(response.body, { message: "Data stored successfully" });

@@ -6,7 +6,7 @@ const database = require("./database");
 const server = express();
 const port = 3000;
 
-// Using the built-in middleware instead of body-parser
+// Using the built-in middleware to parse JSON instead of body-parser
 server.use(express.json());
 
 // Additionally throwing an error message for other request methods
@@ -17,24 +17,24 @@ server.use("/api/sensors", (request, response, next) => {
     next();
 });
 
-// Creating the API endpoint for handling sensor data allowing only POST HTTP request
-server.post("/api/sensors", (request, response) => {
+server.post("/api/sensors", async (request, response) => {
     // Validating the request body
     const { serial, swVersion, temperature, date, gps } = request.body;
     if (!serial || !swVersion || !temperature || !date || !gps) {
-      return response.status(400).json({ error: "Missing required properties in the request body" });
+        return response.status(400).json({ error: "Missing required properties in the request body" });
     }
+    try {
+        // Checking if database connection is intact
+        const client = await database.connectToDatabase(0);
+        const data = { serial, swVersion, temperature, date, gps };
 
-    const data = { serial, swVersion, temperature, date, gps };
-
-    // Calling the insertData function from database.js
-    database.insertData(data, (err, result) => {
-        if (err) {
-            response.status(500).json({ error: "Internal Server Error" });
-        } else {
-            response.status(201).json({ message: "Data stored successfully" });
-        }
-    });
+        // Calling the insertData function from database.js
+        await database.insertData(data);
+        response.status(201).json({ message: "Data stored successfully" });
+    } catch (error) {
+        console.error("Data Insert Error:", error);
+        response.status(500).json({ error: "Internal Server Error" });
+    }
 });
 
 // Optionally returning a response from the landing page
