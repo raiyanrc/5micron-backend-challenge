@@ -4,6 +4,11 @@ This project is a Node.js web server using Express that listens on port 3000 and
 The data is stored in a PostgreSQL database.<br>
 The main endpoint for handling sensor data is `/api/sensors`, which only allows POST requests in JSON format with specific properties.
 
+**The application server is developed following the challenge instructions (https://github.com/minh5micron/5micron-backend-challenge). Postgresql database in plain-text format `db_dump.sql` that contains a table with at least 3 rows of data is included in the repository.**
+
+**Also as an improvement Unit Testing and Docker containerization is also included. Both application server and unit tests can be run/executed directly or using Docker. Please find the details below:**
+
+
 ## Prerequisites
 
 Before running the application, make sure you have the following prerequisites installed on your system:
@@ -130,5 +135,4 @@ Docker is used to pacakage the whole application which makes it independent of e
     ```bash
     docker-compose exec test-runner npm test
     ```
-
-**P.S. Postgresql database in plain-text format `db_dump.sql` that contains a table with at least 3 rows of data is included in the repository.**   
+   
